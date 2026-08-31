@@ -56,6 +56,42 @@ function initGuildConfig(sequelize) {
         type: DataTypes.STRING,
         allowNull: true,
       },
+      suggestionChannelId: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      supportInvite: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      publicInviteCode: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      helpMessage: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+      },
+      inviteAllowedChannelId: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      linkAllowedChannelId: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      digicode: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      digicodeRoleId: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      voiceManagerChannelId: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
       // Paramètres de protection (antispam, antilink, antiinvite, antiraid, ...)
       protectionSettings: {
         type: JsonType,
@@ -66,7 +102,12 @@ function initGuildConfig(sequelize) {
           antiinvite: false,
           antialt: false,
           raidmode: false,
+          firewall: false,
+          imgmod: false,
+          ghostping: false,
+          pfpRequired: false,
           securityLevel: 'low',
+          antileak: { token: true, ipv4: false, email: false, phone: false },
         },
       },
     },

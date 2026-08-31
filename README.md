@@ -219,7 +219,9 @@ Un administrateur de serveur peut réattribuer dynamiquement quelle permission e
 
 - [x] **Phase 1** — Architecture
 - [x] **Phase 2** — Core (`+help`, `+ping`, `+botinfo`, `+configuration`, `+prefix`, `+perms`)
-- [x] **Phase 3** — Modération (38 commandes : ban/kick/mute/warn, rôles, salons, vocal, emojis...) — ce livrable
+- [x] **Phase 3** — Modération (38 commandes : ban/kick/mute/warn, rôles, salons, vocal, emojis...)
+- [x] **Phase 4** — Protection (antispam, antilink, antiinvite, antialt, raidmode, antileak, badwords, firewall, imgmod, ghostping, secur)
+- [x] **Phase 5** — Configuration avancée (autorole, logs, counter, namerole, tagrole, tts, voicemanager, confperms, piconly, invitechannel, linkchannel, protect, confdigi, autoreact, publicserver, recurmsg, sethelp, soutien, suggestion, greeting/joiner/leaver) — ce livrable
 - [ ] Phase 3 — Modération
 - [ ] Phase 4 — Protection (antispam, antilink, antiraid, ...)
 - [ ] Phase 5 — Configuration avancée

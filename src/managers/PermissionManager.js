@@ -41,6 +41,17 @@ class PermissionManager {
   }
 
   /**
+   * Vrai si l'utilisateur est protégé (+protect) : immunisé contre ban/kick/mute
+   * par les modérateurs (seuls le propriétaire du serveur et les owners du bot passent outre).
+   */
+  static async isProtected(guildId, userId) {
+    const flag = await GuildMemberFlag.findOne({
+      where: { guildId, userId, flag: 'protected' },
+    });
+    return Boolean(flag);
+  }
+
+  /**
    * Vrai si l'utilisateur est manager du bot sur ce serveur (+manager).
    */
   static async isManager(guildId, userId) {

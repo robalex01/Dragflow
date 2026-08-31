@@ -26,7 +26,7 @@ function initGuildMemberFlag(sequelize) {
         allowNull: false,
       },
       flag: {
-        type: DataTypes.ENUM('blacklist', 'whitelist', 'manager'),
+        type: DataTypes.ENUM('blacklist', 'whitelist', 'manager', 'protected'),
         allowNull: false,
       },
       reason: {

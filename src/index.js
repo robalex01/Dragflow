@@ -38,6 +38,8 @@ async function bootstrap() {
     partials: [Partials.Message, Partials.Channel, Partials.Reaction, Partials.GuildMember],
   });
 
+  client.setMaxListeners(50);
+
   ErrorHandler.registerGlobalHandlers(client);
 
   loadCommands(client);

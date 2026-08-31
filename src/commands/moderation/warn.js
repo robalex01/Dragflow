@@ -24,7 +24,7 @@ module.exports = {
       return message.channel.send({ embeds: [EmbedManager.genericError('Membre introuvable.')] });
     }
 
-    const hierarchy = checkHierarchy(message, target);
+    const hierarchy = await checkHierarchy(message, target);
     if (!hierarchy.ok) {
       return message.channel.send({
         embeds: [EmbedManager.genericError(hierarchyErrorMessage(hierarchy.reason))],
