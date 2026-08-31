@@ -31,7 +31,7 @@ module.exports = {
         { name: 'Latence API Discord', value: `\`${apiLatency}ms\``, inline: true },
       ],
       client,
-      footerText: 'SoulBot Clone',
+      footerText: 'Dragflow',
       timestamp: true,
     });
 

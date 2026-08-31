@@ -9,6 +9,8 @@ const { initDisabledCommand } = require('./DisabledCommand');
 const { initCommandAlias } = require('./CommandAlias');
 const { initGuildMemberFlag } = require('./GuildMemberFlag');
 const { initCustomCommand } = require('./CustomCommand');
+const { initInfraction } = require('./Infraction');
+const { initTempAction } = require('./TempAction');
 
 const GuildConfig = initGuildConfig(sequelize);
 const CustomPermission = initCustomPermission(sequelize);
@@ -17,6 +19,8 @@ const DisabledCommand = initDisabledCommand(sequelize);
 const CommandAlias = initCommandAlias(sequelize);
 const GuildMemberFlag = initGuildMemberFlag(sequelize);
 const CustomCommand = initCustomCommand(sequelize);
+const Infraction = initInfraction(sequelize);
+const TempAction = initTempAction(sequelize);
 
 module.exports = {
   sequelize,
@@ -27,4 +31,6 @@ module.exports = {
   CommandAlias,
   GuildMemberFlag,
   CustomCommand,
+  Infraction,
+  TempAction,
 };

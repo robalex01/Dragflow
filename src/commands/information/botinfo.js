@@ -44,7 +44,7 @@ module.exports = {
         { name: 'Système', value: `${os.platform()} (${os.arch()})`, inline: true },
       ],
       client,
-      footerText: 'SoulBot Clone — Bot Discord 100% préfixe',
+      footerText: 'Dragflow — Bot Discord 100% préfixe',
       timestamp: true,
     });
 

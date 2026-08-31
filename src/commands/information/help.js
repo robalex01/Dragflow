@@ -19,7 +19,7 @@ function buildOverviewPage({ client, prefix, categories, uniqueCommandsCount, cu
     `\n\n` +
     `**Syntaxes**\n` +
     `\`\`\`\n` +
-    `╭➤￤Soulbot\n` +
+    `╭➤￤Dragflow\n` +
     `┊ - ${prefix}help <commande>\n` +
     `┊ <>・Obligatoire\n` +
     `┊ []・Optionnel\n` +

@@ -1,6 +1,6 @@
-# SoulBot Clone — Bot Discord multifonction (100% préfixe)
+# Dragflow — Bot Discord multifonction (100% préfixe)
 
-Bot Discord modulaire, multi-serveurs, inspiré d'un bot type SoulBot. **Aucune slash command** : toutes les commandes utilisent un système de préfixe configurable par serveur (`+` par défaut).
+Bot Discord modulaire, multi-serveurs, nommé **Dragflow**. **Aucune slash command** : toutes les commandes utilisent un système de préfixe configurable par serveur (`+` par défaut).
 
 > **Statut du projet : PHASE 1 — Architecture.** Cette phase pose les fondations (base de données, chargement des commandes/événements, managers centraux). Les commandes elles-mêmes seront ajoutées phase par phase (voir [Roadmap](#roadmap)).
 
@@ -64,7 +64,7 @@ Prérequis :
 
 ```bash
 git clone <votre-repo>
-cd soulbot-clone
+cd dragflow
 npm install
 cp .env.example .env
 ```
@@ -94,7 +94,7 @@ Remplissez le fichier `.env` à partir de `.env.example` :
 ### Option A — PostgreSQL (recommandé, production)
 
 ```bash
-createdb soulbot
+createdb dragflow
 # puis renseignez DATABASE_URL ou DB_HOST/DB_NAME/DB_USER/DB_PASSWORD dans .env
 DB_DIALECT=postgres
 ```
@@ -218,7 +218,8 @@ Un administrateur de serveur peut réattribuer dynamiquement quelle permission e
 ## Roadmap
 
 - [x] **Phase 1** — Architecture
-- [x] **Phase 2** — Core (`+help`, `+ping`, `+botinfo`, `+configuration`, `+prefix`, `+perms`) — ce livrable
+- [x] **Phase 2** — Core (`+help`, `+ping`, `+botinfo`, `+configuration`, `+prefix`, `+perms`)
+- [x] **Phase 3** — Modération (38 commandes : ban/kick/mute/warn, rôles, salons, vocal, emojis...) — ce livrable
 - [ ] Phase 3 — Modération
 - [ ] Phase 4 — Protection (antispam, antilink, antiraid, ...)
 - [ ] Phase 5 — Configuration avancée

@@ -1,7 +1,7 @@
 {
-  "name": "soulbot-clone",
+  "name": "dragflow",
   "version": "1.0.0",
-  "description": "Bot Discord multifonction 100% préfixe, inspiré de SoulBot",
+  "description": "Dragflow — Bot Discord multifonction 100% préfixe",
   "main": "src/index.js",
   "type": "commonjs",
   "scripts": {

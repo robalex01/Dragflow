@@ -2,6 +2,7 @@
 
 const Logger = require('../utils/Logger');
 const { config } = require('../config/config');
+const TempActionService = require('../services/TempActionService');
 
 module.exports = {
   name: 'clientReady',
@@ -23,5 +24,7 @@ module.exports = {
         },
       ],
     });
+
+    TempActionService.start(client);
   },
 };
