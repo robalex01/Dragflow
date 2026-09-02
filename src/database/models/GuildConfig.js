@@ -92,6 +92,20 @@ function initGuildConfig(sequelize) {
         type: DataTypes.STRING,
         allowNull: true,
       },
+      levelingEnabled: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: true,
+      },
+      cmdOnlyChannelId: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      autoBackupEnabled: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      },
       // Paramètres de protection (antispam, antilink, antiinvite, antiraid, ...)
       protectionSettings: {
         type: JsonType,

@@ -2,6 +2,7 @@
 
 const { EmbedBuilder } = require('discord.js');
 const { config } = require('../config/config');
+const runtimeSettings = require('../state/botRuntimeSettings');
 
 /**
  * EmbedManager centralise la création de tous les embeds du bot.
@@ -25,7 +26,8 @@ class EmbedManager {
    * @param {import('discord.js').Client} [options.client] - permet d'utiliser l'avatar du bot en footer
    */
   static build(options = {}) {
-    const embed = new EmbedBuilder().setColor(options.color || config.embeds.color);
+    const runtime = runtimeSettings.get();
+    const embed = new EmbedBuilder().setColor(options.color || runtime.embedColor || config.embeds.color);
 
     if (options.title) embed.setTitle(options.title.substring(0, 256));
     if (options.description) embed.setDescription(options.description.substring(0, 4096));
@@ -53,10 +55,11 @@ class EmbedManager {
 
     const footerIcon =
       options.footerIcon || (options.client ? options.client.user.displayAvatarURL() : undefined);
+    const footerText = options.footerText || runtime.footerText;
 
-    if (options.footerText || footerIcon) {
+    if (footerText || footerIcon) {
       embed.setFooter({
-        text: options.footerText || '\u200b',
+        text: footerText || '\u200b',
         iconURL: footerIcon,
       });
     }

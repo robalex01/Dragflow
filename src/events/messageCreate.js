@@ -62,6 +62,16 @@ module.exports = {
         return message.channel.send({ embeds: [embed] });
       }
 
+      // Restriction "+cmdonly" : commandes limitées à un salon (sauf administrateurs)
+      const guildConfig = await GuildConfigService.getOrCreate(message.guild.id);
+      if (
+        guildConfig.cmdOnlyChannelId &&
+        message.channel.id !== guildConfig.cmdOnlyChannelId &&
+        !message.member.permissions.has('Administrator')
+      ) {
+        return; // Ignore silencieusement en dehors du salon autorisé.
+      }
+
       // Vérification des permissions (Discord + personnalisées + blacklist + owner)
       const permissionCheck = await PermissionManager.check(message, command);
       if (!permissionCheck.allowed) {

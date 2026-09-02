@@ -222,7 +222,13 @@ Un administrateur de serveur peut réattribuer dynamiquement quelle permission e
 - [x] **Phase 3** — Modération (38 commandes : ban/kick/mute/warn, rôles, salons, vocal, emojis...)
 - [x] **Phase 4** — Protection (antispam, antilink, antiinvite, antialt, raidmode, antileak, badwords, firewall, imgmod, ghostping, secur)
 - [x] **Phase 5** — Configuration avancée (autorole, logs, counter, namerole, tagrole, tts, voicemanager, confperms, piconly, invitechannel, linkchannel, protect, confdigi, autoreact, publicserver, recurmsg, sethelp, soutien, suggestion, greeting/joiner/leaver)
-- [x] **Phase 6** — Fun + Games (12 commandes fun, 10 jeux interactifs par boutons) — ce livrable
+- [x] **Phase 6** — Fun + Games (12 commandes fun, 10 jeux interactifs par boutons)
+- [x] **Phase 7** — Giveaway + Level + Invites (systèmes persistants avec balayage automatique)
+- [x] **Phase 8** — Tickets (panel persistant, claim, transcripts, logs, survit aux redémarrages)
+- [x] **Phase 9** — Statistiques (collecte réelle des messages/vocal/arrivées, heatmap, comparaison, profils)
+- [x] **Phase 10** — Owner (38 commandes : permissions avancées, blacklist/whitelist/manager, identité et présence globales du bot, sauvegardes, sécurité maximale) — ce livrable
+
+> Note sur la Phase 6 : les commandes `+gay` et `+orientation` du cahier des charges original ont été remplacées par `+fact` et `+riddle`. Assigner une orientation sexuelle (donnée sensible) à un membre réel, même sous forme de blague, n'est pas un contenu que le bot génère.
 - [ ] Phase 3 — Modération
 - [ ] Phase 4 — Protection (antispam, antilink, antiraid, ...)
 - [ ] Phase 5 — Configuration avancée

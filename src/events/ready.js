@@ -4,6 +4,9 @@ const Logger = require('../utils/Logger');
 const { config } = require('../config/config');
 const TempActionService = require('../services/TempActionService');
 const RecurringMessageService = require('../services/RecurringMessageService');
+const runtimeSettings = require('../state/botRuntimeSettings');
+const StatusRotationService = require('../services/StatusRotationService');
+const BackupService = require('../services/BackupService');
 
 module.exports = {
   name: 'clientReady',
@@ -28,5 +31,8 @@ module.exports = {
 
     TempActionService.start(client);
     RecurringMessageService.start(client);
+    await runtimeSettings.load();
+    StatusRotationService.init(client);
+    BackupService.start(client);
   },
 };
