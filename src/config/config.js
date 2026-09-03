@@ -53,8 +53,30 @@ const config = {
     inviteUrl: process.env.SUPPORT_SERVER_INVITE || null,
   },
 
+  dashboard: {
+    enabled: process.env.DASHBOARD_ENABLED !== 'false',
+    port: Number(process.env.DASHBOARD_PORT) || 3001,
+    url: process.env.DASHBOARD_URL || 'http://localhost:5173',
+    clientId: process.env.DISCORD_CLIENT_ID || null,
+    clientSecret: process.env.DISCORD_CLIENT_SECRET || null,
+    redirectUri: process.env.DISCORD_REDIRECT_URI || null,
+    sessionSecret: process.env.SESSION_SECRET || null,
+  },
+
   env: process.env.NODE_ENV || 'development',
 };
+
+function validateDashboardConfig() {
+  if (!config.dashboard.enabled) return { ok: false, missing: [], disabled: true };
+
+  const missing = [];
+  if (!config.dashboard.clientId) missing.push('DISCORD_CLIENT_ID');
+  if (!config.dashboard.clientSecret) missing.push('DISCORD_CLIENT_SECRET');
+  if (!config.dashboard.redirectUri) missing.push('DISCORD_REDIRECT_URI');
+  if (!config.dashboard.sessionSecret) missing.push('SESSION_SECRET');
+
+  return { ok: missing.length === 0, missing, disabled: false };
+}
 
 function validateConfig() {
   const missing = [];
@@ -77,4 +99,4 @@ function validateConfig() {
   }
 }
 
-module.exports = { config, validateConfig };
+module.exports = { config, validateConfig, validateDashboardConfig };

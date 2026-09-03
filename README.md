@@ -226,15 +226,33 @@ Un administrateur de serveur peut réattribuer dynamiquement quelle permission e
 - [x] **Phase 7** — Giveaway + Level + Invites (systèmes persistants avec balayage automatique)
 - [x] **Phase 8** — Tickets (panel persistant, claim, transcripts, logs, survit aux redémarrages)
 - [x] **Phase 9** — Statistiques (collecte réelle des messages/vocal/arrivées, heatmap, comparaison, profils)
-- [x] **Phase 10** — Owner (38 commandes : permissions avancées, blacklist/whitelist/manager, identité et présence globales du bot, sauvegardes, sécurité maximale) — ce livrable
+- [x] **Phase 10** — Owner (38 commandes : permissions avancées, blacklist/whitelist/manager, identité et présence globales du bot, sauvegardes, sécurité maximale)
+- [x] **Phase 11** — Tests & audit complet — **développement du bot terminé**
 
 > Note sur la Phase 6 : les commandes `+gay` et `+orientation` du cahier des charges original ont été remplacées par `+fact` et `+riddle`. Assigner une orientation sexuelle (donnée sensible) à un membre réel, même sous forme de blague, n'est pas un contenu que le bot génère.
-- [ ] Phase 3 — Modération
-- [ ] Phase 4 — Protection (antispam, antilink, antiraid, ...)
-- [ ] Phase 5 — Configuration avancée
-- [ ] Phase 6 — Fun + Games
-- [ ] Phase 7 — Giveaway + Level + Invites
-- [ ] Phase 8 — Tickets
-- [ ] Phase 9 — Statistiques
-- [ ] Phase 10 — Owner
-- [ ] Phase 11 — Tests & audit complet
+
+### Audit final (Phase 11)
+
+| Vérification | Résultat |
+|---|---|
+| Commandes uniques chargées | **173**, zéro doublon de nom |
+| Alias enregistrés | **93**, zéro conflit |
+| Événements Discord | **23 fichiers** (avant le dashboard), 11 types, tous correctement multiplexés |
+| Modèles de base de données | **28 modèles**, synchronisation sans erreur |
+| Persistance après redémarrage | Validée (connexion fermée, cache Node vidé, réouverture sur le même fichier) |
+| Isolation multi-serveurs | Validée (aucune fuite de données entre guildes) |
+| Sécurité des permissions | Validée (hiérarchie, `owner` global ≠ `administrator`, permissions personnalisées) |
+| Hiérarchie de modération | Validée (5 scénarios critiques) |
+| Règles "100% Embed" / "100% préfixe" / "aucun TODO" | Validées par recherche automatisée |
+
+## Dashboard Web (en développement)
+
+Un dashboard web (React + TypeScript + Vite + Tailwind pour le frontend, API Express intégrée **au même processus Node que le bot** pour le backend) est en cours de construction dans `src/web/`. Voir [`.env.example`](.env.example) pour les variables `DASHBOARD_*` et `DISCORD_CLIENT_*` nécessaires — le bot fonctionne normalement sans elles (le dashboard se désactive silencieusement si la configuration est incomplète).
+
+**Livré :**
+- OAuth2 Discord complet (scopes `identify` + `guilds`), sessions persistées en base (`connect-session-sequelize`), protection CSRF (double-soumission de cookie), rate limiting, CORS restreint à `DASHBOARD_URL`.
+- `GET /api/user`, `GET /api/guilds` (croise les serveurs de l'utilisateur avec la présence réelle du bot et ses permissions Discord), `GET /api/commands` (catalogue dynamique lu depuis `client.commands` — toute nouvelle commande ajoutée dans `src/commands/` apparaît automatiquement, sans code supplémentaire).
+- Démarrage du serveur web accroché à l'événement `clientReady` (`src/events/webServerStart.js`), jamais au chargement des modules — le bot démarre normalement même si le dashboard n'est pas configuré.
+
+**À venir :** sélection de serveur (frontend), layout du dashboard, pages de configuration/modération/protection, exécution de commandes depuis l'interface.
+
