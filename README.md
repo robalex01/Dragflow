@@ -251,8 +251,10 @@ Un dashboard web (React + TypeScript + Vite + Tailwind pour le frontend, API Exp
 
 **Livré :**
 - OAuth2 Discord complet (scopes `identify` + `guilds`), sessions persistées en base (`connect-session-sequelize`), protection CSRF (double-soumission de cookie), rate limiting, CORS restreint à `DASHBOARD_URL`.
-- `GET /api/user`, `GET /api/guilds` (croise les serveurs de l'utilisateur avec la présence réelle du bot et ses permissions Discord), `GET /api/commands` (catalogue dynamique lu depuis `client.commands` — toute nouvelle commande ajoutée dans `src/commands/` apparaît automatiquement, sans code supplémentaire).
+- `GET /api/user`, `GET /api/guilds` (croise les serveurs de l'utilisateur avec la présence réelle du bot et ses permissions Discord), `GET /api/guilds/:guildId` (détail d'un serveur, protégé par `requireGuildAccess`), `GET /api/commands` et `GET /api/categories` (catalogue dynamique lu depuis `client.commands` — toute nouvelle commande ajoutée dans `src/commands/` apparaît automatiquement, sans code supplémentaire).
+- Frontend React + TypeScript + Vite + Tailwind : pages Login, Servers, DashboardLayout (sidebar générée dynamiquement depuis `/api/categories`), Overview, Commands, Category, Profile. États loading/empty/error sur chaque page.
 - Démarrage du serveur web accroché à l'événement `clientReady` (`src/events/webServerStart.js`), jamais au chargement des modules — le bot démarre normalement même si le dashboard n'est pas configuré.
+- **Déploiement à port unique** (ex: hébergeurs gratuits type Wispbyte qui n'exposent qu'un seul port) : le backend Express sert directement `frontend/dist` avec fallback SPA, écoute explicitement sur `0.0.0.0`, et un script `postinstall` (`scripts/build-frontend.js`) build automatiquement le frontend à chaque `npm install` — aucune commande supplémentaire à ajouter au script de démarrage de l'hébergeur.
 
-**À venir :** sélection de serveur (frontend), layout du dashboard, pages de configuration/modération/protection, exécution de commandes depuis l'interface.
+**À venir :** exécution de commandes depuis l'interface (formulaires générés dynamiquement à partir des métadonnées de commande), pages de configuration/modération/protection dédiées.
 
