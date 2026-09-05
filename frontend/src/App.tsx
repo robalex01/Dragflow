@@ -6,6 +6,8 @@ import { DashboardLayout } from './pages/DashboardLayout';
 import { OverviewPage } from './pages/OverviewPage';
 import { CommandsPage } from './pages/CommandsPage';
 import { CategoryPage } from './pages/CategoryPage';
+import { ModerationPage } from './pages/ModerationPage';
+import { ConfigurationPage } from './pages/ConfigurationPage';
 import { ProfilePage } from './pages/ProfilePage';
 
 function FullPageSpinner() {
@@ -59,6 +61,8 @@ export function App() {
       >
         <Route index element={<OverviewPage />} />
         <Route path="commands" element={<CommandsPage />} />
+        <Route path="category/moderation" element={<ModerationPage />} />
+        <Route path="category/configuration" element={<ConfigurationPage />} />
         <Route path="category/:categoryKey" element={<CategoryPage />} />
       </Route>
 

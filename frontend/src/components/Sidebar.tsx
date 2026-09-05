@@ -62,9 +62,15 @@ export function Sidebar({ guildId, user, mobileOpen, onCloseMobile }: SidebarPro
           <NavLink to={`/servers/${guildId}/commands`} className={({ isActive }) => linkClasses(isActive)}>
             Commandes
           </NavLink>
+          <NavLink to={`/servers/${guildId}/category/moderation`} className={({ isActive }) => linkClasses(isActive)}>
+            Modération
+          </NavLink>
+          <NavLink to={`/servers/${guildId}/category/configuration`} className={({ isActive }) => linkClasses(isActive)}>
+            Configuration
+          </NavLink>
 
           <p className="px-3 pt-4 pb-1 text-xs font-medium uppercase tracking-wide text-neutral-400">
-            Catégories
+            Autres catégories
           </p>
 
           {isLoading && (
@@ -75,7 +81,7 @@ export function Sidebar({ guildId, user, mobileOpen, onCloseMobile }: SidebarPro
             </div>
           )}
 
-          {categories?.map((cat) => (
+          {categories?.filter((cat) => !['moderation', 'configuration'].includes(cat.key)).map((cat) => (
             <NavLink
               key={cat.key}
               to={`/servers/${guildId}/category/${cat.key}`}

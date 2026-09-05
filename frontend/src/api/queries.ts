@@ -1,6 +1,6 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { apiRequest, ApiRequestError } from './client';
-import type { DashboardUser, Guild, GuildDetail, Command } from '../types';
+import type { DashboardUser, Guild, GuildDetail, Command, DashboardAction, GuildMember, GuildRole, GuildChannel } from '../types';
 
 export interface Category {
   key: string;
@@ -54,5 +54,62 @@ export function useCategories(enabled: boolean) {
     queryFn: async () => (await apiRequest<{ categories: Category[] }>('/api/categories')).categories,
     enabled,
     staleTime: 5 * 60 * 1000,
+  });
+}
+
+export function useActions(guildId: string | undefined) {
+  return useQuery<DashboardAction[], ApiRequestError>({
+    queryKey: ['actions', guildId],
+    queryFn: async () => (await apiRequest<{ actions: DashboardAction[] }>(`/api/guilds/${guildId}/actions`)).actions,
+    enabled: Boolean(guildId),
+    staleTime: 5 * 60 * 1000,
+  });
+}
+
+export function useRunAction(guildId: string | undefined) {
+  const queryClient = useQueryClient();
+  return useMutation<{ success: boolean; message: string }, ApiRequestError, { actionKey: string; params: Record<string, unknown> }>({
+    mutationFn: ({ actionKey, params }) =>
+      apiRequest(`/api/guilds/${guildId}/actions/${actionKey}`, { method: 'POST', body: params }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['guild', guildId] });
+    },
+  });
+}
+
+export function useGuildMembers(guildId: string | undefined, search: string) {
+  return useQuery<GuildMember[], ApiRequestError>({
+    queryKey: ['members', guildId, search],
+    queryFn: async () =>
+      (
+        await apiRequest<{ members: GuildMember[] }>(
+          `/api/guilds/${guildId}/members?search=${encodeURIComponent(search)}`
+        )
+      ).members,
+    enabled: Boolean(guildId),
+    staleTime: 30 * 1000,
+  });
+}
+
+export function useGuildRoles(guildId: string | undefined) {
+  return useQuery<GuildRole[], ApiRequestError>({
+    queryKey: ['roles', guildId],
+    queryFn: async () => (await apiRequest<{ roles: GuildRole[] }>(`/api/guilds/${guildId}/roles`)).roles,
+    enabled: Boolean(guildId),
+    staleTime: 60 * 1000,
+  });
+}
+
+export function useGuildChannels(guildId: string | undefined, type?: 'text' | 'voice') {
+  return useQuery<GuildChannel[], ApiRequestError>({
+    queryKey: ['channels', guildId, type],
+    queryFn: async () =>
+      (
+        await apiRequest<{ channels: GuildChannel[] }>(
+          `/api/guilds/${guildId}/channels${type ? `?type=${type}` : ''}`
+        )
+      ).channels,
+    enabled: Boolean(guildId),
+    staleTime: 60 * 1000,
   });
 }

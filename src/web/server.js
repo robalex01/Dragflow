@@ -16,6 +16,8 @@ const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
 const { createGuildsRouter } = require('./routes/guilds');
 const { createGuildDetailRouter } = require('./routes/guildDetail');
+const { createGuildResourcesRouter } = require('./routes/guildResources');
+const { createActionsRouter } = require('./routes/actions');
 const { createCommandsRouter } = require('./routes/commands');
 const { createCategoriesRouter } = require('./routes/categories');
 
@@ -66,6 +68,8 @@ async function createWebServer(client) {
   app.use('/api/user', userRoutes);
   app.use('/api/guilds', createGuildsRouter(client));
   app.use('/api/guilds/:guildId', createGuildDetailRouter(client));
+  app.use('/api/guilds/:guildId', createGuildResourcesRouter(client));
+  app.use('/api/guilds/:guildId/actions', createActionsRouter(client));
   app.use('/api/commands', createCommandsRouter(client));
   app.use('/api/categories', createCategoriesRouter(client));
 
